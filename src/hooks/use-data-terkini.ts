@@ -4,25 +4,7 @@ import { useState, useEffect } from 'react';
 import { ref, onValue } from "firebase/database";
 import useSWR from 'swr'; // Import SWR
 import { db } from "@/lib/firebase"; // Pastikan path ini benar
-
-// --- Definisi Tipe Data (Tetap sama) ---
-interface DataSensor {
-  gas_ppm: number;
-  status_api: string;
-}
-
-interface StatusAktuator {
-  alarm_aktif: boolean;
-  kipas_aktif: boolean;
-  pompa_aktif: boolean;
-}
-
-interface StatusTerkini {
-  data_sensor: DataSensor;
-  status_aktuator: StatusAktuator;
-  status_sistem: string;
-  update_terakhir: number;
-}
+import { StatusTerkini } from '@/types/types';
 
 function useStatusData() {
   const swrKey = '/status_terkini';

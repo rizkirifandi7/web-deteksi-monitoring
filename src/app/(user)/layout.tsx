@@ -5,26 +5,22 @@ import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import ThemeToggle from "@/components/theme-button";
 import AuthGuard from "@/components/auth-guard";
-import useStatusData from "@/hooks/use-status-data";
 import useFcmToken from "@/hooks/use-fcm-token";
+import useStatusData from "@/hooks/use-data-terkini";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-	// --- BLOK LOGIKA NOTIFIKASI DIMULAI DI SINI ---
 	const { data: statusData } = useStatusData();
 	const { token: fcmToken } = useFcmToken();
 
-	// State untuk mencegah notifikasi dikirim berulang kali
 	const [gasNotifSent, setGasNotifSent] = useState(false);
 	const [apiNotifSent, setApiNotifSent] = useState(false);
 
 	useEffect(() => {
-		// Pastikan data dan token sudah siap
 		if (!statusData || !fcmToken) return;
 
 		const { data_sensor } = statusData;
-		const DANGER_LEVEL_GAS = 200; // Sesuaikan ambang batas bahaya gas
+		const DANGER_LEVEL_GAS = 200;
 
-		// Logika untuk Notifikasi Gas
 		if (data_sensor.gas_ppm >= DANGER_LEVEL_GAS) {
 			if (!gasNotifSent) {
 				console.log("Mengirim notifikasi bahaya gas...");
@@ -41,11 +37,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 				setGasNotifSent(true);
 			}
 		} else if (gasNotifSent) {
-			// Reset status jika kondisi kembali aman
 			setGasNotifSent(false);
 		}
 
-		// Logika untuk Notifikasi Api
 		if (data_sensor.status_api === "Terdeteksi") {
 			if (!apiNotifSent) {
 				console.log("Mengirim notifikasi peringatan api...");
@@ -62,11 +56,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 				setApiNotifSent(true);
 			}
 		} else if (apiNotifSent) {
-			// Reset status jika kondisi kembali aman
 			setApiNotifSent(false);
 		}
 	}, [statusData, fcmToken, gasNotifSent, apiNotifSent]);
-	// --- BLOK LOGIKA NOTIFIKASI SELESAI ---
 
 	return (
 		<AuthGuard>

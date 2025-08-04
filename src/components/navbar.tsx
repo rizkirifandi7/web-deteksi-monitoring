@@ -14,17 +14,12 @@ const Navbar = () => {
 	const router = useRouter();
 	const pathname = usePathname();
 
-	console.log("pathname", pathname);
-
-	// 5. Buat fungsi untuk handle logout
 	const handleLogout = async () => {
 		try {
 			await signOut(auth);
-			// Arahkan ke halaman login setelah berhasil logout
 			router.push("/login");
 		} catch (error) {
 			console.error("Gagal untuk logout:", error);
-			// Anda bisa menambahkan notifikasi error di sini jika perlu
 		}
 	};
 

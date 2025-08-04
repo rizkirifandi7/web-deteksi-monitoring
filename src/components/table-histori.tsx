@@ -25,7 +25,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpDown } from "lucide-react";
-import { LogKejadian } from "@/hooks/use-histori";
+import { DataTableRiwayatProps, LogKejadian } from "@/types/types";
 
 // Definisikan kolom untuk data LogKejadian
 export const columns: ColumnDef<LogKejadian>[] = [
@@ -78,11 +78,6 @@ export const columns: ColumnDef<LogKejadian>[] = [
 		},
 	},
 ];
-
-// Komponen DataTable yang menerima data sebagai props
-interface DataTableRiwayatProps {
-	data: LogKejadian[];
-}
 
 export function DataTableRiwayat({ data }: DataTableRiwayatProps) {
 	const [sorting, setSorting] = React.useState<SortingState>([]);

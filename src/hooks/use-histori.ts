@@ -6,15 +6,9 @@ import { useState, useEffect } from 'react';
 import { ref, onValue, query, orderByChild } from "firebase/database";
 import useSWR from 'swr';
 import { db } from "@/lib/firebase";
+import { LogKejadian } from '@/types/types';
 
-// Tipe data untuk setiap item log
-export interface LogKejadian {
-  id: string; // Kunci unik dari Firebase
-  jenis_ancaman: string;
-  level: "Aman" | "Siaga" | "Bahaya";
-  nilai_sensor: number;
-  timestamp: number; // Firebase akan mengubah ServerValue menjadi angka
-}
+
 
 function useLogKejadian() {
   const swrKey = '/log_kejadian';

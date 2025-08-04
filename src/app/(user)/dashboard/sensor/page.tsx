@@ -6,11 +6,11 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import useStatusData from "@/hooks/use-status-data";
 import { Skeleton } from "@/components/ui/skeleton";
 import { GasStatusCard } from "@/components/sensor-card/gas-status-card";
 import FireStatusCard from "@/components/sensor-card/fire-status-card";
 import StatusKeamananCard from "@/components/sensor-card/status-keamanan-card";
+import useStatusData from "@/hooks/use-data-terkini";
 
 const SensorPage = () => {
 	const { data, isLoading, error } = useStatusData();

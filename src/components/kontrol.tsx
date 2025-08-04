@@ -12,21 +12,14 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Fan, Siren, Droplet } from "lucide-react"; // Ganti FireExtinguisher
-import { DataControl } from "@/hooks/use-kontrol";
-
-// --- Langkah 1: Definisikan Interface untuk Props ---
-interface KontrolProps {
-	data: DataControl | null | undefined;
-	updateControl: (updates: Partial<DataControl>) => Promise<void>;
-	isUpdating: boolean;
-}
+import { DataControl, KontrolProps } from "@/types/types";
 
 // Definisikan data kontrol di satu tempat agar efisien
 const controls = [
 	{
 		id: "buzzer-switch",
-		label: "Buzzer",
-		description: "Kontrol Buzzer",
+		label: "Buzzer & LED",
+		description: "Kontrol Buzzer & LED",
 		Icon: Siren,
 		dataKey: "buzzer" as keyof DataControl,
 	},

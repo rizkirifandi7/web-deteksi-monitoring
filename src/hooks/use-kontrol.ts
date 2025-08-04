@@ -6,23 +6,13 @@ import { useState, useEffect } from 'react';
 import { ref, onValue, update } from "firebase/database"; // Import 'update'
 import useSWR from 'swr';
 import { db } from "@/lib/firebase";
-
-// --- Definisi Tipe Data ---
-// Menambahkan 'buzzer' sesuai dengan UI Anda
-export interface DataControl {
-  fan: boolean;
-  mode: string;
-  pump: boolean;
-  buzzer: boolean; 
-}
+import { DataControl } from '@/types/types';
 
 // Fungsi untuk mengupdate data ke Firebase
-// Menggunakan Partial<DataControl> agar kita bisa update sebagian data saja
 const updateControlData = async (updates: Partial<DataControl>) => {
   const controlRef = ref(db, '/control');
   await update(controlRef, updates);
 };
-
 
 function useKontrol() {
   const swrKey = '/control';

@@ -9,19 +9,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Fan, ShowerHead, Bell, LucideProps } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-// Tipe untuk status aktuator yang diterima dari hook
-interface ActuatorStatus {
-	kipas_aktif: boolean;
-	pompa_aktif: boolean;
-	alarm_aktif: boolean; // Menggunakan nama dari hook Anda
-	// asumsikan led adalah bagian dari alarm
-}
-
-// Tipe untuk props komponen utama
-interface StatusKeamananCardProps {
-	status?: ActuatorStatus;
-}
+import { ActuatorStatus, StatusKeamananCardProps } from "@/types/types";
 
 // Definisikan data aktuator di satu tempat (Prinsip DRY)
 const actuators = [
@@ -36,7 +24,7 @@ const actuators = [
 		statusKey: "pompa_aktif" as keyof ActuatorStatus,
 	},
 	{
-		name: "Buzzer",
+		name: "Buzzer & LED",
 		Icon: Bell,
 		statusKey: "alarm_aktif" as keyof ActuatorStatus,
 	},

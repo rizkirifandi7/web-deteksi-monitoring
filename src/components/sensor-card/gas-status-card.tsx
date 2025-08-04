@@ -12,18 +12,7 @@ import {
 	CardDescription,
 } from "@/components/ui/card";
 import { Badge } from "../ui/badge";
-
-// Tipe untuk level bahaya
-interface DangerLevels {
-	LOW: number;
-	HIGH: number;
-}
-
-// Tipe untuk props komponen
-interface ChartPieGasProps {
-	gasValue?: number;
-	maxPpm?: number;
-}
+import { ChartPieGasProps, DangerLevels } from "@/types/types";
 
 const DANGER_LEVELS: DangerLevels = {
 	LOW: 200, // Batas aman

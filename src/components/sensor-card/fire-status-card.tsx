@@ -8,10 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Flame, ShieldCheck } from "lucide-react";
-
-interface FireStatusProps {
-	fireStatus?: string;
-}
+import { FireStatusProps } from "@/types/types";
 
 const FireStatusCard: React.FC<FireStatusProps> = ({ fireStatus }) => {
 	const isDanger = fireStatus === "Terdeteksi";
