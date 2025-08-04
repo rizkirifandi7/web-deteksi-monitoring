@@ -78,10 +78,8 @@ export const NotificationProvider = ({
 
 			const data = await response.json();
 			console.log("Notifikasi terkirim:", data);
-			// Fungsi ini tidak perlu mengembalikan data, jadi Promise<void> sudah cukup
 		} catch (error) {
 			console.error("Gagal mengirim notifikasi:", error);
-			// Melempar error lagi agar bisa ditangani di tempat pemanggilan jika perlu
 			throw error;
 		}
 	};

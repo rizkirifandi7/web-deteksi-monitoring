@@ -139,21 +139,16 @@ export const GasStatusCard: React.FC<ChartPieGasProps> = ({
 				<p className="text-sm text-neutral-400 dark:text-neutral-400">
 					Status Gas:
 				</p>
-				<Badge
-					className={`mt-2 px-4 py-1 text-sm font-bold tracking-wider ${
-						gasValue < DANGER_LEVELS.LOW
-							? "bg-emerald-500 text-white"
-							: gasValue < DANGER_LEVELS.HIGH
-							? "bg-amber-500 text-white"
-							: "bg-red-500 text-white"
-					}`}
-				>
-					{gasValue < DANGER_LEVELS.LOW
-						? "AMAN"
-						: gasValue < DANGER_LEVELS.HIGH
-						? "SIAGA"
-						: "BAHAYA"}
-				</Badge>
+				<div className="flex items-center gap-2 w-full justify-center pt-2">
+					<Badge variant="default" className="flex flex-col bg-emerald-500">
+						0 - 299
+						<span>Aman</span>
+					</Badge>
+					<Badge variant="destructive" className="flex flex-col">
+						300+
+						<span>Bahaya</span>
+					</Badge>
+				</div>
 			</div>
 		</Card>
 	);

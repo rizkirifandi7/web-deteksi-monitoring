@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { ref, onValue } from "firebase/database";
-import useSWR from 'swr'; // Import SWR
-import { db } from "@/lib/firebase"; // Pastikan path ini benar
+import useSWR from 'swr';
+import { db } from "@/lib/firebase";
 import { StatusTerkini } from '@/types/types';
 
 function useStatusData() {

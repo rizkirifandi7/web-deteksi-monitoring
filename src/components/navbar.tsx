@@ -1,14 +1,12 @@
-// components/Navbar.tsx
-
-"use client"; // 1. Jadikan Client Component
+"use client";
 
 import { History, House, LogOut, SlidersHorizontal } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Card } from "./ui/card";
-import { usePathname, useRouter } from "next/navigation"; // 2. Impor useRouter
-import { signOut } from "firebase/auth"; // 3. Impor signOut
-import { auth } from "@/lib/firebase"; // 4. Impor auth instance
+import { usePathname, useRouter } from "next/navigation";
+import { signOut } from "firebase/auth";
+import { auth } from "@/lib/firebase";
 
 const Navbar = () => {
 	const router = useRouter();
@@ -51,7 +49,7 @@ const Navbar = () => {
 				<Link
 					href={"/dashboard/histori"}
 					className={`py-5 flex flex-col justify-center items-center text-xs md:text-sm ${
-						pathname == "/histori"
+						pathname == "/dashboard/histori"
 							? "bg-neutral-100 dark:bg-neutral-800 rounded-md"
 							: ""
 					}`}

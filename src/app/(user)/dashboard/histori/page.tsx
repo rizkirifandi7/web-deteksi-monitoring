@@ -14,7 +14,6 @@ import useLogKejadian from "@/hooks/use-histori";
 const HistoriPage = () => {
 	const { data, isLoading, error } = useLogKejadian();
 
-	// Tampilkan pesan loading atau error
 	if (isLoading && !data) return <p>Memuat data riwayat...</p>;
 	if (error) return <p className="text-red-500">{error}</p>;
 

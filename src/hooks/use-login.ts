@@ -1,5 +1,3 @@
-// src/hooks/use-login.ts
-
 'use client';
 
 import { useState } from 'react';
@@ -20,12 +18,11 @@ export function useLogin() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       router.push('/dashboard/sensor');
-    } catch (error) { // 2. Tangkap error sebagai 'unknown' (default)
+    } catch (error) {
       let errorMessage = "Terjadi kesalahan. Silakan coba lagi.";
       
-      // 3. Periksa apakah error berasal dari Firebase
       if (error instanceof FirebaseError) {
-        switch (error.code) { // 4. Akses 'error.code' dengan aman
+        switch (error.code) {
           case 'auth/user-not-found':
             errorMessage = "Email tidak terdaftar.";
             break;
@@ -42,10 +39,8 @@ export function useLogin() {
             console.error("Firebase login error:", error);
         }
       } else {
-        // Tangani error lain yang mungkin bukan dari Firebase
         console.error("Unexpected error:", error);
       }
-      
       setError(errorMessage);
     } finally {
       setIsLoading(false);

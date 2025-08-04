@@ -8,33 +8,28 @@ import useSWR from 'swr';
 import { db } from "@/lib/firebase";
 import { LogKejadian } from '@/types/types';
 
-
-
 function useLogKejadian() {
   const swrKey = '/log_kejadian';
-  // SWR akan menyimpan array LogKejadian
   const { data, isLoading, mutate } = useSWR<LogKejadian[]>(swrKey, null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Query untuk mengurutkan data berdasarkan timestamp
     const logRef = query(ref(db, swrKey), orderByChild('timestamp'));
     
     const unsubscribe = onValue(logRef, (snapshot) => {
       if (snapshot.exists()) {
         const rawData = snapshot.val();
-        // Ubah objek dari Firebase menjadi array, lalu balik urutannya
         const processedData: LogKejadian[] = Object.entries(rawData)
           .map(([id, value]) => ({
             id,
             ...(value as Omit<LogKejadian, 'id'>),
           }))
-          .reverse(); // Balik array agar data terbaru di atas
+          .reverse();
         
         mutate(processedData, false);
         setError(null);
       } else {
-        mutate([], false); // Kirim array kosong jika tidak ada data
+        mutate([], false);
         setError("Data 'log_kejadian' tidak ditemukan.");
       }
     }, (err) => {
