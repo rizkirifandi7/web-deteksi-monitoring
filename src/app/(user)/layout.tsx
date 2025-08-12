@@ -16,7 +16,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
 	return (
 		<AuthGuard>
-			<div className="flex h-screen flex-col items-center justify-center border-x bg-muted ">
+			<div className="flex h-screen flex-col items-center justify-center border-x bg-muted">
 				<div className="h-full w-full max-w-sm overflow-auto border-x bg-white px-4 dark:bg-black md:max-w-lg md:px-6">
 					<div className="flex flex-col items-center justify-center gap-y-2 pt-8 pb-4">
 						<h1 className="dark:text-white' uppercase text-2xl font-bold">

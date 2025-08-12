@@ -1,8 +1,6 @@
-// hooks/useLogKejadian.ts
-
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { ref, onValue, query, orderByChild } from "firebase/database";
 import useSWR from 'swr';
 import { db } from "@/lib/firebase";
@@ -13,10 +11,10 @@ function useLogKejadian() {
   const { data, isLoading, mutate } = useSWR<LogKejadian[]>(swrKey, null);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
+  const fetchLogKejadian = useCallback(() => {
     const logRef = query(ref(db, swrKey), orderByChild('timestamp'));
     
-    const unsubscribe = onValue(logRef, (snapshot) => {
+    return onValue(logRef, (snapshot) => {
       if (snapshot.exists()) {
         const rawData = snapshot.val();
         const processedData: LogKejadian[] = Object.entries(rawData)
@@ -36,9 +34,12 @@ function useLogKejadian() {
       console.error("Firebase read error:", err);
       setError("Gagal terhubung ke Firebase.");
     });
+  }, [swrKey, mutate]);
 
+  useEffect(() => {
+    const unsubscribe = fetchLogKejadian();
     return () => unsubscribe();
-  }, [swrKey, mutate]); 
+  }, [fetchLogKejadian]);
 
   return { data, isLoading, error };
 }

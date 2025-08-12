@@ -8,19 +8,19 @@ import {
 	CardDescription,
 	CardContent,
 } from "@/components/ui/card";
-import { DataTableRiwayat } from "@/components/table-histori"; // Sesuaikan path jika perlu // Gunakan hook yang baru
+import { DataTableRiwayat } from "@/components/table-histori";
 import useLogKejadian from "@/hooks/use-histori";
 
 const HistoriPage = () => {
 	const { data, isLoading, error } = useLogKejadian();
 
-	if (isLoading && !data) return <p>Memuat data riwayat...</p>;
+	if (isLoading && !data) return <p>Memuat data histori...</p>;
 	if (error) return <p className="text-red-500">{error}</p>;
 
 	return (
 		<Card className="rounded-md border shadow-none mt-2">
 			<CardHeader className="text-center border-b">
-				<CardTitle>Riwayat Kejadian</CardTitle>
+				<CardTitle>Histori Kejadian</CardTitle>
 				<CardDescription>
 					Daftar kejadian yang tercatat oleh sistem keamanan.
 				</CardDescription>

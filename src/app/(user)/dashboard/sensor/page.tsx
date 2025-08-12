@@ -39,11 +39,11 @@ const SensorPage = () => {
 	return (
 		<div className="mt-2">
 			<div className="grid grid-cols-2 gap-4">
-				<GasStatusCard gasValue={data?.data_sensor.gas_ppm} />
-				<FireStatusCard fireStatus={data?.data_sensor.status_api} />
+				<GasStatusCard gasValue={data?.gas_ppm} />
+				<FireStatusCard fireStatus={data?.api_terdeteksi} />
 			</div>
 
-			<StatusKeamananCard status={data?.status_aktuator} />
+			<StatusKeamananCard data={data} />
 		</div>
 	);
 };

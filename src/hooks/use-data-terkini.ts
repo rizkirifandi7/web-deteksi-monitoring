@@ -1,34 +1,38 @@
-'use client'; // Menandakan ini adalah Client Component
+'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { ref, onValue } from "firebase/database";
 import useSWR from 'swr';
 import { db } from "@/lib/firebase";
 import { StatusTerkini } from '@/types/types';
 
 function useStatusData() {
-  const swrKey = '/status_terkini';
+  const swrKey = '/data_terkini';
   const { data, isLoading, mutate } = useSWR<StatusTerkini | null>(swrKey, null);
   const [listenerError, setListenerError] = useState<string | null>(null);
 
-  useEffect(() => {
+  console.log(data)
+
+  const fetchStatusData = useCallback(() => {
     const statusRef = ref(db, swrKey);
-    const unsubscribe = onValue(statusRef, (snapshot) => {
+    return onValue(statusRef, (snapshot) => {
       const result: StatusTerkini | null = snapshot.exists() ? snapshot.val() : null;
       mutate(result, false);
       if (result) {
         setListenerError(null);
       } else {
-        setListenerError("Data 'status_terkini' tidak ditemukan di database.");
+        setListenerError("Data 'data_terkini' tidak ditemukan di database.");
       }
-
     }, (error) => {
       console.error("Firebase read error:", error);
       setListenerError("Gagal terhubung ke Firebase. Periksa koneksi atau konfigurasi Anda.");
     });
+  }, [swrKey, mutate]);
 
+  useEffect(() => {
+    const unsubscribe = fetchStatusData();
     return () => unsubscribe();
-  }, [swrKey, mutate]); 
+  }, [fetchStatusData]);
 
   return { data, isLoading, error: listenerError };
 }

@@ -49,7 +49,6 @@ export const columns: ColumnDef<LogKejadian>[] = [
 				day: "numeric",
 				hour: "2-digit",
 				minute: "2-digit",
-				second: "2-digit",
 			});
 			return <div className="font-medium">{formattedDate}</div>;
 		},
@@ -61,6 +60,7 @@ export const columns: ColumnDef<LogKejadian>[] = [
 			<div className="capitalize">{row.getValue("jenis_ancaman")}</div>
 		),
 	},
+
 	{
 		accessorKey: "level",
 		header: "Level",
@@ -76,6 +76,33 @@ export const columns: ColumnDef<LogKejadian>[] = [
 				</Badge>
 			);
 		},
+	},
+	{
+		accessorKey: "alarm_aktif",
+		header: "Alarm",
+		cell: ({ row }) => (
+			<div className="capitalize">
+				{row.getValue("alarm_aktif") === true ? "Aktif" : "Mati"}
+			</div>
+		),
+	},
+	{
+		accessorKey: "kipas_aktif",
+		header: "Kipas",
+		cell: ({ row }) => (
+			<div className="capitalize">
+				{row.getValue("kipas_aktif") === true ? "Aktif" : "Mati"}
+			</div>
+		),
+	},
+	{
+		accessorKey: "pompa_aktif",
+		header: "Pompa",
+		cell: ({ row }) => (
+			<div className="capitalize">
+				{row.getValue("pompa_aktif") === true ? "Aktif" : "Mati"}
+			</div>
+		),
 	},
 ];
 

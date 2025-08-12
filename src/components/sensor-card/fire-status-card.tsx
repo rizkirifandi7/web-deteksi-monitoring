@@ -11,7 +11,7 @@ import { Flame, ShieldCheck } from "lucide-react";
 import { FireStatusProps } from "@/types/types";
 
 const FireStatusCard: React.FC<FireStatusProps> = ({ fireStatus }) => {
-	const isDanger = fireStatus === "Terdeteksi";
+	const isDanger = fireStatus === true;
 
 	return (
 		<Card

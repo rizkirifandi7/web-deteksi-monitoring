@@ -1,26 +1,10 @@
-export interface DataSensor {
+export interface StatusTerkini {
   gas_ppm: number;
-  status_api: string;
-}
-
-export interface StatusAktuator {
+  api_terdeteksi: boolean;
   alarm_aktif: boolean;
   kipas_aktif: boolean;
   pompa_aktif: boolean;
-}
-
-export interface StatusTerkini {
-  data_sensor: DataSensor;
-  status_aktuator: StatusAktuator;
-  status_sistem: string;
   update_terakhir: number;
-}
-
-export interface DataControl {
-  fan: boolean;
-  mode: string;
-  pump: boolean;
-  buzzer: boolean; 
 }
 
 // Tipe data untuk setiap item log
@@ -45,25 +29,12 @@ export interface ChartPieGasProps {
 }
 
 export interface FireStatusProps {
-	fireStatus?: string;
-}
-
-// Tipe untuk status aktuator yang diterima dari hook
-export interface ActuatorStatus {
-	kipas_aktif: boolean;
-	pompa_aktif: boolean;
-	alarm_aktif: boolean; // Menggunakan nama dari hook Anda
+	fireStatus?: boolean;
 }
 
 // Tipe untuk props komponen utama
 export interface StatusKeamananCardProps {
-  status: ActuatorStatus | undefined;
-}
-
-export interface KontrolProps {
-  data: DataControl | null | undefined;
-  updateControl: (updates: Partial<DataControl>) => Promise<void>;
-  isUpdating: boolean;
+  data: StatusTerkini | undefined | null;
 }
 
 // Komponen DataTable yang menerima data sebagai props

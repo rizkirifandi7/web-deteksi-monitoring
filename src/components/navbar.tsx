@@ -1,6 +1,6 @@
 "use client";
 
-import { History, House, LogOut, SlidersHorizontal } from "lucide-react";
+import { History, House, LogOut } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Card } from "./ui/card";
@@ -23,7 +23,7 @@ const Navbar = () => {
 
 	return (
 		<div className="py-4">
-			<Card className="grid grid-cols-4 items-center justify-center w-full text-center text-sm font-medium shadow-none rounded-md py-0">
+			<Card className="grid grid-cols-3 items-center justify-center w-full text-center text-sm font-medium shadow-none rounded-md py-0">
 				<Link
 					href={"/dashboard/sensor"}
 					className={`py-5 flex flex-col justify-center items-center text-xs md:text-sm ${
@@ -34,17 +34,6 @@ const Navbar = () => {
 				>
 					<House size={20} />
 					Sensor
-				</Link>
-				<Link
-					href={"/dashboard/kontrol"}
-					className={`py-5 flex flex-col justify-center items-center text-xs md:text-sm ${
-						pathname == "/dashboard/kontrol"
-							? "bg-neutral-100 dark:bg-neutral-800 rounded-md"
-							: ""
-					}`}
-				>
-					<SlidersHorizontal size={20} />
-					Kontrol
 				</Link>
 				<Link
 					href={"/dashboard/histori"}
@@ -60,7 +49,7 @@ const Navbar = () => {
 
 				<button
 					onClick={handleLogout}
-					className={`py-5 flex flex-col justify-center items-center text-xs md:text-sm  dark:hover:bg-red-950/50 rounded-r-md transition-colors ${
+					className={`py-5 flex flex-col justify-center items-center text-xs cursor-pointer md:text-sm  dark:hover:bg-red-950/50 rounded-r-md transition-colors ${
 						pathname == "/dashboard/logout"
 							? "bg-neutral-100 dark:bg-neutral-800 rounded-md"
 							: ""

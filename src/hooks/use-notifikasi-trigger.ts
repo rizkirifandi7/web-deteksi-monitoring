@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { useNotifikasi } from './use-notifikasi';
 
 interface UseNotificationTriggerProps {
-  statusData: { data_sensor: { gas_ppm: number; status_api: string; } } | undefined | null;
+  statusData: { gas_ppm: number; api_terdeteksi: boolean; } | undefined | null;
   fcmToken: string | null;
 }
 
@@ -17,18 +17,18 @@ const useNotificationTrigger = ({ statusData, fcmToken }: UseNotificationTrigger
   useEffect(() => {
     if (!statusData || !fcmToken) return;
 
-    const { data_sensor } = statusData;
+    const { gas_ppm, api_terdeteksi } = statusData;
     const DANGER_LEVEL_GAS = 300;
 
     // --- Logika Notifikasi Gas ---
-    if (data_sensor.gas_ppm >= DANGER_LEVEL_GAS) {
+    if (gas_ppm >= DANGER_LEVEL_GAS) {
       if (!gasNotifSent.current) {
         console.log("Memicu pengiriman notifikasi bahaya gas...");
         // Ganti fetch dengan sendNotification
         sendNotification(
           fcmToken,
           "🚨 Bahaya Gas Terdeteksi!",
-          `Level gas mencapai ${data_sensor.gas_ppm} PPM.`
+          `Level gas mencapai ${gas_ppm} PPM.`
         );
         gasNotifSent.current = true;
       }
@@ -37,7 +37,7 @@ const useNotificationTrigger = ({ statusData, fcmToken }: UseNotificationTrigger
     }
 
     // --- Logika Notifikasi Api ---
-    if (data_sensor.status_api === "Terdeteksi") {
+    if (api_terdeteksi) {
       if (!apiNotifSent.current) {
         console.log("Memicu pengiriman notifikasi peringatan api...");
         // Ganti fetch dengan sendNotification

@@ -9,7 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useLogin } from "@/hooks/use-login"; // Impor hook Anda
-import { Loader2 } from "lucide-react"; // Ikon untuk loading
+import { Loader2, Shield } from "lucide-react"; // Ikon untuk loading
 
 export function LoginForm({
 	className,
@@ -30,8 +30,15 @@ export function LoginForm({
 				<CardContent className="p-0">
 					<form onSubmit={handleLogin} className="p-6 md:p-8">
 						<div className="flex flex-col gap-6">
-							<div className="flex flex-col items-center text-center">
-								<h1 className="text-xl font-bold">Smart Home Safety</h1>
+							<div className="flex flex-col items-center text-center gap-y-0.5">
+								<Shield
+									size={48}
+									strokeWidth={3}
+									className="text-emerald-500 mb-2"
+								/>
+								<h1 className="text-xl font-bold uppercase">
+									Smart Home Safety
+								</h1>
 								<p className="text-sm text-muted-foreground">
 									Masukkan kredensial Anda untuk masuk ke sistem.
 								</p>
@@ -43,7 +50,6 @@ export function LoginForm({
 									id="email"
 									type="email"
 									placeholder="m@example.com"
-									
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
 									disabled={isLoading}
@@ -56,7 +62,6 @@ export function LoginForm({
 									id="password"
 									type="password"
 									placeholder="*********"
-									
 									value={password}
 									onChange={(e) => setPassword(e.target.value)}
 									disabled={isLoading}
@@ -68,7 +73,11 @@ export function LoginForm({
 								<p className="text-sm font-medium text-destructive">{error}</p>
 							)}
 
-							<Button type="submit" className="w-full" disabled={isLoading}>
+							<Button
+								type="submit"
+								className="w-full bg-emerald-500 dark:text-white"
+								disabled={isLoading}
+							>
 								{isLoading ? (
 									<Loader2 className="h-4 w-4 animate-spin" />
 								) : (

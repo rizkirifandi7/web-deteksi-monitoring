@@ -80,7 +80,7 @@ export const GasStatusCard: React.FC<ChartPieGasProps> = ({
 	return (
 		<Card className="border rounded-md shadow-none">
 			<CardHeader className="text-center border-b">
-				<CardTitle>Sensor Gas Status</CardTitle>
+				<CardTitle>Sensor Gas</CardTitle>
 				<CardDescription>Deteksi tingkat gas</CardDescription>
 			</CardHeader>
 			<div className="h-[170px] w-full">
@@ -140,13 +140,15 @@ export const GasStatusCard: React.FC<ChartPieGasProps> = ({
 					Status Gas:
 				</p>
 				<div className="flex items-center gap-2 w-full justify-center pt-2">
-					<Badge variant="default" className="flex flex-col bg-emerald-500">
-						0 - 299
-						<span>Aman</span>
+					<Badge
+						variant="default"
+						className="flex flex-col bg-emerald-500 dark:text-white"
+					>
+						<span>Aman</span>0 - 299
 					</Badge>
 					<Badge variant="destructive" className="flex flex-col">
-						300+
 						<span>Bahaya</span>
+						<span>{`< 300+`}</span>
 					</Badge>
 				</div>
 			</div>

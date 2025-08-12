@@ -9,24 +9,24 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Fan, ShowerHead, Bell, LucideProps } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ActuatorStatus, StatusKeamananCardProps } from "@/types/types";
+import { StatusTerkini, StatusKeamananCardProps } from "@/types/types";
 
 // Definisikan data aktuator di satu tempat (Prinsip DRY)
 const actuators = [
 	{
 		name: "Kipas Angin",
 		Icon: Fan,
-		statusKey: "kipas_aktif" as keyof ActuatorStatus,
+		statusKey: "kipas_aktif" as keyof StatusTerkini,
 	},
 	{
 		name: "Pompa Air",
 		Icon: ShowerHead,
-		statusKey: "pompa_aktif" as keyof ActuatorStatus,
+		statusKey: "pompa_aktif" as keyof StatusTerkini,
 	},
 	{
 		name: "Buzzer & LED",
 		Icon: Bell,
-		statusKey: "alarm_aktif" as keyof ActuatorStatus,
+		statusKey: "alarm_aktif" as keyof StatusTerkini,
 	},
 ];
 
@@ -59,7 +59,7 @@ const ActuatorItem: React.FC<{
 	</div>
 );
 
-const StatusKeamananCard: React.FC<StatusKeamananCardProps> = ({ status }) => {
+const StatusKeamananCard: React.FC<StatusKeamananCardProps> = ({ data }) => {
 	return (
 		<Card className="rounded-md border shadow-none mt-6">
 			<CardHeader className="text-center border-b">
@@ -74,7 +74,7 @@ const StatusKeamananCard: React.FC<StatusKeamananCardProps> = ({ status }) => {
 						key={actuator.name}
 						name={actuator.name}
 						Icon={actuator.Icon}
-						isActive={status?.[actuator.statusKey] ?? false}
+						isActive={!!(data?.[actuator.statusKey] ?? false)}
 					/>
 				))}
 			</CardContent>
