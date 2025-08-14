@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
+import { auth } from '@/lib/firebase';
 
 
 export function useLogin() {
@@ -11,7 +12,6 @@ export function useLogin() {
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const router = useRouter();
-  const auth = getAuth();
 
   const login = async (email: string, password: string) => {
     setIsLoading(true);

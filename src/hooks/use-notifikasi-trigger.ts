@@ -43,7 +43,7 @@ const useNotificationTrigger = ({ statusData, fcmToken }: UseNotificationTrigger
         // Ganti fetch dengan sendNotification
         sendNotification(
           fcmToken,
-          "🔥 PERINGATAN KEBAKARAN!",
+          "🔥 Bahaya Api Terdeteksi!",
           "Sistem mendeteksi adanya api. Segera ambil tindakan!"
         );
         apiNotifSent.current = true;
