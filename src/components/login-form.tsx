@@ -9,7 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useLogin } from "@/hooks/use-login"; // Impor hook Anda
-import { Loader2, Shield } from "lucide-react"; // Ikon untuk loading
+import { CheckCircle2, Loader2, Shield } from "lucide-react"; // Ikon untuk loading
 
 export function LoginForm({
 	className,
@@ -17,7 +17,7 @@ export function LoginForm({
 }: React.ComponentProps<"div">) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const { login, isLoading, error } = useLogin();
+	const { login, isLoading, error, successMessage } = useLogin();
 
 	const handleLogin = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -71,6 +71,14 @@ export function LoginForm({
 							{/* Tampilkan pesan error jika ada */}
 							{error && (
 								<p className="text-sm font-medium text-destructive">{error}</p>
+							)}
+
+							{/* Tampilkan pesan sukses jika ada */}
+							{successMessage && (
+								<div className="flex items-center justify-center gap-2 text-sm font-medium text-emerald-500">
+									<CheckCircle2 className="h-4 w-4" />
+									<p>{successMessage}</p>
+								</div>
 							)}
 
 							<Button

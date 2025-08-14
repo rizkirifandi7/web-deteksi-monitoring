@@ -2,22 +2,30 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { FirebaseError } from 'firebase/app'; // 1. Impor FirebaseError
-import { auth } from '@/lib/firebase';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { FirebaseError } from 'firebase/app';
+
 
 export function useLogin() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const router = useRouter();
+  const auth = getAuth();
 
   const login = async (email: string, password: string) => {
     setIsLoading(true);
     setError(null);
+    setSuccessMessage(null);
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      router.push('/dashboard/sensor');
+      setSuccessMessage("Berhasil Login!");
+      
+      setTimeout(() => {
+        router.push('/dashboard/sensor');
+      }, 5000);
+
     } catch (error) {
       let errorMessage = "Terjadi kesalahan. Silakan coba lagi.";
       
@@ -42,10 +50,9 @@ export function useLogin() {
         console.error("Unexpected error:", error);
       }
       setError(errorMessage);
-    } finally {
-      setIsLoading(false);
-    }
+      setIsLoading(false); // Hentikan loading hanya jika terjadi error
+    } 
   };
 
-  return { login, isLoading, error };
+  return { login, isLoading, error, successMessage };
 }
