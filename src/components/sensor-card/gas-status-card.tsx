@@ -44,7 +44,7 @@ const chartConfig = {
 
 export const GasStatusCard: React.FC<ChartPieGasProps> = ({
 	gasValue = 0,
-	maxPpm = 1000,
+	maxPpm = 10000,
 }) => {
 	const chartData = React.useMemo(() => {
 		const gasLevelColor =
@@ -144,11 +144,11 @@ export const GasStatusCard: React.FC<ChartPieGasProps> = ({
 						variant="default"
 						className="flex flex-col bg-emerald-500 dark:text-white"
 					>
-						<span>Aman</span>0 - 299
+						<span>Aman</span>0 - 2999
 					</Badge>
 					<Badge variant="destructive" className="flex flex-col">
 						<span>Bahaya</span>
-						<span>{`< 300+`}</span>
+						<span>{`< 3000`}</span>
 					</Badge>
 				</div>
 			</div>

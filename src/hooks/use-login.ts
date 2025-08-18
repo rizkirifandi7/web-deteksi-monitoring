@@ -24,7 +24,7 @@ export function useLogin() {
       
       setTimeout(() => {
         router.push('/dashboard/sensor');
-      }, 5000);
+      }, 2000);
 
     } catch (error) {
       let errorMessage = "Terjadi kesalahan. Silakan coba lagi.";
